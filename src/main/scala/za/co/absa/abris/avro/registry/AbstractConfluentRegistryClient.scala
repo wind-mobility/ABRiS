@@ -41,7 +41,15 @@ abstract class AbstractConfluentRegistryClient(client: SchemaRegistryClient) ext
     client.getSchemaMetadata(subject, version)
 
   override def getById(schemaId: Int): Schema = {
-    val parsedSchema = client.getSchemaById(schemaId)
+    val parsedSchema =
+      try {
+        client.getSchemaById(schemaId)
+      } catch {
+        case _: Exception =>
+          import scala.collection.JavaConverters._
+          val subjectVersion = client.getAllVersionsById(schemaId).asScala.toArray.head
+          client.getSchemaBySubjectAndId(subjectVersion.getSubject, subjectVersion.getVersion)
+      }
     parsedSchema match {
       case schema: AvroSchema => schema.rawSchema()
       case schema => throw new UnsupportedOperationException(s"Only AvroSchema is supported," +
