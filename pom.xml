@@ -11,7 +11,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>za.co.absa</groupId>
     <artifactId>abris_2.12</artifactId>
-    <version>6.3.1-apicuriofix-SNAPSHOT</version>
+    <version>6.3.1-apicurio-5-SNAPSHOT</version>
     <name>abris</name>
     <description>Provides seamless integration between Avro and Spark Structured APIs.</description>
     <url>https://github.com/AbsaOSS/ABRiS</url>
@@ -194,6 +194,12 @@
             <groupId>za.co.absa.commons</groupId>
             <artifactId>commons_${scala.compat.version}</artifactId>
             <version>1.0.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.apicurio</groupId>
+            <artifactId>apicurio-registry-client</artifactId>
+            <version>2.2.3.Final</version>
         </dependency>
 
     </dependencies>
